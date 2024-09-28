@@ -41,6 +41,7 @@ export const generatePDF = async (products, pdfName) => {
     const browser = await puppeteer.launch({
         executablePath: process.env.CHROME_BIN,
         headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
     await page.setContent(html);
