@@ -47,12 +47,13 @@ export const getQuotations = async (req, res) => {
             return res.status(404).json({ msg: messages.quotation.notExists });
         }
 
+        const baseUrl = `${req.protocol}://${req.get('host')}`;
         let token = req.header('Authorization');
         const pdfsWithLinks = quotations.map(quotation => {
             return {
                 id: quotation._id,
                 date: quotation.date,
-                pdfUrl: `/api/products/download/${quotation.pdfName}?Authorization=${token}`
+                pdfUrl: `${baseUrl}/api/products/download/${quotation.pdfName}?Authorization=${token}`
             };
         });
 
