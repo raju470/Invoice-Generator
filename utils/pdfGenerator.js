@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import Handlebars from 'handlebars';
+import { messages } from '../constants/messages.js';
 
 const calculateTotals = (products) => {
     let subtotal = 0;
@@ -49,7 +50,7 @@ export const generatePDF = async (products, pdfName) => {
     });
 
     await browser.close();
-    console.log('PDF Generated');
+    console.log(messages.pdf.generated);
 
     return pdfPath;
 };

@@ -3,6 +3,7 @@ import Product from '../models/Product.js';
 import { generatePDF } from '../utils/pdfGenerator.js';
 import Quotation from '../models/Quotation.js';
 import { v4 as uuidv4 } from 'uuid';
+import { messages } from '../constants/messages.js';
 
 export const addProducts = async (req, res) => {
     try {
@@ -43,7 +44,7 @@ export const getQuotations = async (req, res) => {
 
         const quotations = await Quotation.find({ userId }).select('pdfName date');
         if (quotations.length === 0) {
-            return res.status(404).json({ msg: 'No quotations found for this user.' });
+            return res.status(404).json({ msg: messages.quotation.notExists });
         }
 
         let token = req.header('Authorization');
@@ -75,7 +76,7 @@ export const downloadQuotation = async (req, res) => {
             const pdfStream = fs.createReadStream(pdfPath);
             pdfStream.pipe(res);
         } else {
-            return res.status(404).json({ msg: 'PDF not found' });
+            return res.status(404).json({ msg: messages.pdf.notFound });
         }
     } catch (err) {
         return res.status(500).json({ msg: err.message });
