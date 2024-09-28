@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-container {
+            width: 80%;
+            margin: 20% auto;
+            padding: 20px;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .invoice-header h1 {
+            margin: 0;
+        }
+
+        .invoice-table {
+            width: 100%;
+            margin: 10px 0;
+            border-bottom: 1px solid #ccc;
+            table-layout: fixed;
+        }
+
+        .invoice-table th {
+            border-bottom: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .invoice-table td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        .invoice-summary {
+            padding-top: 10px;
+            text-align: left;
+            width: 250px;
+            float: right;
+        }
+
+        .invoice-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .grand-total {
+            font-weight: bold;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .validity {
+            clear: both;
+            padding-top: 10px;
+        }
+
+        .footer-div {
+            font-size: 12px;
+            text-align: left;
+            background-color: black;
+            color: white;
+            padding: 5px 30px;
+            border-radius: 50px;
+            margin-top: 100px; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{qty}}</td>
+                    <td>{{rate}}</td>
+                    <td>INR {{total}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <div class="invoice-summary">
+            <p><strong>Total</strong> <span>INR {{subtotal}}</span></p>
+            <p>GST (18%) <span>{{gst}}</span></p>
+            <p class="grand-total">Grand Total <span>INR {{finalTotal}}</span></p>
+        </div>
+
+        <div class="validity">
+            <p>Valid until: {{date}}</p>
+        </div>
+
+        <div class="footer-div">
+            <p><b>Terms and Conditions</b></p>
+            <p>We are happy to supply any further information you may need and trust that you call on us to fill your order.
+                <br>
+                which will receive our prompt and careful attention
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

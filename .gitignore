@@ -1,0 +1,24 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# dotenv environment variables file
+.env
+
+# Ignore coverage reports
+coverage/
+
+# Ignore built directories (if using any build step)
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
