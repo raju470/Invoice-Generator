@@ -38,7 +38,10 @@ export const generatePDF = async (products, pdfName) => {
 
     const html = template(pdfData);
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        executablePath: process.env.CHROME_BIN,
+        headless: true,
+    });
     const page = await browser.newPage();
     await page.setContent(html);
 
