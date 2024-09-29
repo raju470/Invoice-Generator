@@ -1,9 +1,9 @@
-import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import Handlebars from 'handlebars';
 import { messages } from '../constants/messages.js';
 import { fileURLToPath } from 'url';
+import pdf from 'html-pdf';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,24 +44,17 @@ export const generatePDF = async (products, pdfName) => {
 
     const html = template(pdfData);
 
-    const browser = await puppeteer.launch({
-        executablePath: process.env.CHROME_BIN,
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    const pdfPath = path.join(__dirname, '../pdf', pdfName);
+
+    return new Promise((resolve, reject) => {
+        pdf.create(html, { format: 'A4', border: '10mm' }).toFile(pdfPath, (err, res) => {
+            if (err) {
+                console.error(messages.pdf.error, err);
+                return reject(err);
+            }
+
+            console.log(messages.pdf.generated, pdfPath);
+            resolve(pdfPath);
+        });
     });
-    const page = await browser.newPage();
-    await page.setContent(html);
-
-    const pdfPath = `./pdf/${pdfName}`;
-    await page.pdf({
-        path: pdfPath,
-        format: 'A4',
-        printBackground: true
-    });
-
-    await browser.close();
-    console.log(messages.pdf.generated);
-
-    return pdfPath;
 };
-

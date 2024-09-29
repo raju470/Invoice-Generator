@@ -17,6 +17,7 @@ export const messages = {
     pdf: {
         notFound: 'PDF not found',
         generated: 'PDF Generated',
+        error: 'Error generating PDF:'
     },
     server: {
         error: 'Server error, please try again later',

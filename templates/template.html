@@ -71,13 +71,17 @@
         }
 
         .footer-div {
-            font-size: 12px;
+            font-size: 8px !important;
             text-align: left;
             background-color: black;
             color: white;
             padding: 5px 30px;
             border-radius: 50px;
-            margin-top: 100px; 
+            margin-top: 100px;
+        }
+
+        .invoice-summary-value {
+            float: right;
         }
     </style>
 </head>
@@ -107,9 +111,9 @@
         </table>
 
         <div class="invoice-summary">
-            <p><strong>Total</strong> <span>INR {{subtotal}}</span></p>
-            <p>GST (18%) <span>{{gst}}</span></p>
-            <p class="grand-total">Grand Total <span>INR {{finalTotal}}</span></p>
+            <p><strong>Total</strong> <span class="invoice-summary-value">INR {{subtotal}}</span></p>
+            <p>GST (18%) <span class="invoice-summary-value">{{gst}}</span></p>
+            <p class="grand-total">Grand Total <span class="invoice-summary-value">INR {{finalTotal}}</span></p>
         </div>
 
         <div class="validity">
@@ -118,9 +122,8 @@
 
         <div class="footer-div">
             <p><b>Terms and Conditions</b></p>
-            <p>We are happy to supply any further information you may need and trust that you call on us to fill your order.
-                <br>
-                which will receive our prompt and careful attention
+            <p>We are happy to supply any further information you may need and trust that you call on us to fill your
+                order. which will receive our prompt and careful attention
             </p>
         </div>
     </div>
