@@ -1,7 +1,12 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
+import path from 'path';
 import Handlebars from 'handlebars';
 import { messages } from '../constants/messages.js';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const calculateTotals = (products) => {
     let subtotal = 0;
@@ -18,7 +23,8 @@ const calculateTotals = (products) => {
 
 // Generate PDF function
 export const generatePDF = async (products, pdfName) => {
-    const htmlTemplate = fs.readFileSync('./templates/template.html', 'utf8');
+    const templatePath = path.join(__dirname, '../', 'templates', 'template.html');
+    const htmlTemplate = fs.readFileSync(templatePath, 'utf8');
     const template = Handlebars.compile(htmlTemplate);
 
     const totals = calculateTotals(products);
